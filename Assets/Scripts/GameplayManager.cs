@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -9,6 +10,8 @@ public class GameplayManager : MonoBehaviour
     public TextMeshProUGUI storyText;
     public Transform insultComebackParent;
     public GameObject insultComebackPrefab;
+
+    public float dialogueDelay = 2f;
     
     private InsultComeback[] _insultComebacks;
     
@@ -25,18 +28,25 @@ public class GameplayManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         FillInsultComebackList();
+        StartCoroutine(StartBattle());
+
+    }
+
+    private IEnumerator StartBattle()
+    {
         _isPlayerTurn = UnityEngine.Random.value > 0.5f;
         if (_isPlayerTurn)
         {
-            StartCoroutine(DelayedStoryText("You are the first to speak.", 3f));
+            storyText.text = "[PLAYER] I'll start!";
+            yield return new WaitForSeconds(dialogueDelay);
             PlayerTurn();
         }
         else
         {
-            StartCoroutine(DelayedStoryText("Your opponent is the first to speak.", 3f));
+            storyText.text = "[ENEMY] It's my turn!";
+            yield return new WaitForSeconds(dialogueDelay);
             EnemyTurn();
         }
-
     }
 
     private void FillInsultComebackList()
@@ -77,31 +87,36 @@ public class GameplayManager : MonoBehaviour
 
     private void AddInsultListener(Button button, int index)
     {
-        button.onClick.AddListener(() => Insult(index));
+        button.onClick.AddListener(() => StartCoroutine(Insult(index)));
     }
 
     private void AddComebackListener(Button button, int insultIndex, int comebackIndex)
     {
-        button.onClick.AddListener(() => Comeback(insultIndex, comebackIndex));
+        button.onClick.AddListener(() => StartCoroutine(Comeback(insultIndex, comebackIndex)));
     }
     
-    private void Insult(int index)
+    private IEnumerator Insult(int index)
     {
         foreach (Transform child in insultComebackParent.transform)
         {
             Destroy(child.gameObject);
         }
-        StartCoroutine(DelayedStoryText("[PLAYER]\n" + _insultComebacks[index].insult, 3f));
+
+        storyText.text = "[PLAYER]\n" + _insultComebacks[index].insult;
+        yield return new WaitForSeconds(dialogueDelay);
         var enemyComebackIndex = UnityEngine.Random.Range(0, _insultComebacks.Length);
         var enemyComeback = _insultComebacks[enemyComebackIndex].comeback;
-        StartCoroutine(DelayedStoryText("[ENEMY]\n" + enemyComeback, 3f));
+        storyText.text = "[ENEMY]\n" + enemyComeback;
+        yield return new WaitForSeconds(dialogueDelay);
         if (enemyComebackIndex == index)
         {
             _playerLives--;
-            StartCoroutine(DelayedStoryText("You lost a life", 3f));
+            storyText.text = "You lost a life!";
+            yield return new WaitForSeconds(dialogueDelay);
             if (_playerLives == 0)
             {
-                StartCoroutine(DelayedStoryText("You lost the game", 3f));
+                storyText.text = "You lost the game...";
+                yield return new WaitForSeconds(dialogueDelay);
                 Endgame(false);
             }
             EnemyTurn();
@@ -109,55 +124,60 @@ public class GameplayManager : MonoBehaviour
         else
         {
             _enemyLives--;
-            StartCoroutine(DelayedStoryText("Your opponent lost a life", 3f));
+            storyText.text = "Your opponent lost a life.";
+            yield return new WaitForSeconds(dialogueDelay);
             if (_enemyLives == 0)
             {
-                StartCoroutine(DelayedStoryText("You won the game", 3f));
+                storyText.text = "You won the game!";
+                yield return new WaitForSeconds(dialogueDelay);
                 Endgame(true);
             }
             PlayerTurn();
         }
     }
     
-    private void Comeback(int insultIndex, int comebackIndex)
+    private IEnumerator Comeback(int insultIndex, int comebackIndex)
     {
         foreach (Transform child in insultComebackParent.transform)
         {
             Destroy(child.gameObject);
         }
-        StartCoroutine(DelayedStoryText("[PLAYER]\n" + _insultComebacks[comebackIndex].comeback, 3f));
+        storyText.text = "[PLAYER]\n" + _insultComebacks[comebackIndex].comeback;
+        yield return new WaitForSeconds(dialogueDelay);
         if (insultIndex == comebackIndex)
         {
             _enemyLives--;
-            StartCoroutine(DelayedStoryText("Your opponent lost a life", 3f));
+            storyText.text = "Your opponent lost a life.";
+            yield return new WaitForSeconds(dialogueDelay);
             if (_enemyLives == 0)
             {
-                StartCoroutine(DelayedStoryText("You won the game", 3f));
+                storyText.text = "Your won the game!";
+                yield return new WaitForSeconds(dialogueDelay);
                 Endgame(true);
             }
-            PlayerTurn();
+            else
+            {
+                PlayerTurn();    
+            }
         }
         else
         {
             _playerLives--;
-            StartCoroutine(DelayedStoryText("You lost a life", 3f));
+            storyText.text = "You lost a life.";
+            yield return new WaitForSeconds(dialogueDelay);
             if (_playerLives == 0)
             {
-                StartCoroutine(DelayedStoryText("You lost the game", 3f));
+                storyText.text = "You lost the game...";
+                yield return new WaitForSeconds(dialogueDelay);
                 Endgame(false);
+            } else {
+                EnemyTurn();
             }
-            EnemyTurn();
         }
     }
     
     private void Endgame(bool isPlayerWinner)
     {
-        
-    }
-    
-    private IEnumerator DelayedStoryText(string text, float delay)
-    {
-        storyText.text = text;
-        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOver");
     }
 }
