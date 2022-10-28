@@ -20,6 +20,7 @@ public class PlayerTurn : State
         GameplayManager.storyText.text = "[PLAYER]\n" + GameplayManager.insultComebacks[insultIndex].insult;
         yield return new WaitForSeconds(GameplayManager.dialogueDelay);
         var enemyComebackIndex = Random.Range(0, GameplayManager.insultComebacks.Length);
+        if (Random.value > 0.66f) enemyComebackIndex = insultIndex;
         var enemyComeback = GameplayManager.insultComebacks[enemyComebackIndex].comeback;
         GameplayManager.storyText.text = "[ENEMY]\n" + enemyComeback;
         yield return new WaitForSeconds(GameplayManager.dialogueDelay);
