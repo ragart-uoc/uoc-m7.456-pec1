@@ -9,7 +9,7 @@ public class Begin : State
     
     public override IEnumerator Start()
     {
-        if (GameplayManager.isPlayerTurn)
+        if (Random.value > 0.5f)
         {
             GameplayManager.storyText.text = "[PLAYER] I'll start!";
             yield return new WaitForSeconds(GameplayManager.dialogueDelay);

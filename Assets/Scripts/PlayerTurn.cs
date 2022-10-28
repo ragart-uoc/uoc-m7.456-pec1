@@ -16,7 +16,7 @@ public class PlayerTurn : State
     
     public override IEnumerator Insult(int insultIndex)
     {
-        GameplayManager.DestroyInsultComebacks();
+        GameplayManager.DestroyInsultComebacksOnScreen();
         GameplayManager.storyText.text = "[PLAYER]\n" + GameplayManager.insultComebacks[insultIndex].insult;
         yield return new WaitForSeconds(GameplayManager.dialogueDelay);
         var enemyComebackIndex = Random.Range(0, GameplayManager.insultComebacks.Length);
@@ -25,10 +25,9 @@ public class PlayerTurn : State
         yield return new WaitForSeconds(GameplayManager.dialogueDelay);
         if (enemyComebackIndex == insultIndex)
         {
-            GameplayManager.playerLives--;
             GameplayManager.storyText.text = "You lost a life!";
             yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            if (GameplayManager.playerLives == 0)
+            if (GameplayManager.Player.TakeDamage(1))
             {
                 GameplayManager.SetState(new Lost(GameplayManager));
             }
@@ -39,10 +38,9 @@ public class PlayerTurn : State
         }
         else
         {
-            GameplayManager.enemyLives--;
             GameplayManager.storyText.text = "Your opponent lost a life.";
             yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            if (GameplayManager.enemyLives == 0)
+            if (GameplayManager.Enemy.TakeDamage(1))
             {
                 GameplayManager.SetState(new Won(GameplayManager));
             }

@@ -11,34 +11,31 @@ public class GameplayManager : StateMachine
 
     public float dialogueDelay = 2f;
     
-    public InsultComeback[] insultComebacks;
-    
-    public bool isPlayerTurn;
-    
-    public int playerLives = 3;
-    public int enemyLives = 3;
+    [HideInInspector] public InsultComeback[] insultComebacks;
+
+    public Character Player = new Character(3);
+    public Character Enemy = new Character(3);
 
     private void Start()
     {
         storyText.text = String.Empty;
-        DestroyInsultComebacks();
-        insultComebacks = FillInsultComebackList();
-        isPlayerTurn = UnityEngine.Random.value > 0.5f;
+        DestroyInsultComebacksOnScreen();
+        insultComebacks = GetInsultComebackList();
         SetState(new Begin(this));
     }
+
+    private InsultComeback[] GetInsultComebackList()
+    {
+        var insultComebackList = Resources.Load<TextAsset>("InsultComeback");
+        return JsonUtility.FromJson<InsultComebackList>("{\"insultComebacks\":" + insultComebackList.text + "}").insultComebacks;
+    }
     
-    public void DestroyInsultComebacks()
+    public void DestroyInsultComebacksOnScreen()
     {
         foreach (Transform child in insultComebackParent.transform)
         {
             Destroy(child.gameObject);
         }
-    }
-
-    private InsultComeback[] FillInsultComebackList()
-    {
-        var insultComebackList = Resources.Load<TextAsset>("InsultComeback");
-        return JsonUtility.FromJson<InsultComebackList>("{\"insultComebacks\":" + insultComebackList.text + "}").insultComebacks;
     }
 
     public void FillInsults()
