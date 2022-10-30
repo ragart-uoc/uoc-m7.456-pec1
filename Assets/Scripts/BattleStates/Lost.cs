@@ -14,8 +14,11 @@ namespace PEC1.BattleStates
 
         public override IEnumerator Start()
         {
+            CombatManager.playerText.text = String.Empty;
+            CombatManager.enemyText.text = "I won! Surrender your assets!";
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
             CombatManager.enemyText.text = String.Empty;
-            CombatManager.playerText.text = "I surrender!";
+            CombatManager.playerText.text = "D'oh!";
             yield return new WaitForSeconds(CombatManager.dialogueDelay);
             SceneManager.LoadScene("GameOver");
         }
