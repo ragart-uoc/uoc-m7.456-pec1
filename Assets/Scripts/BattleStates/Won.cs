@@ -14,6 +14,8 @@ namespace PEC1.BattleStates
 
         public override IEnumerator Start()
         {
+            CombatManager.mEnemyAnimator.SetTrigger("onEnemyDead");
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
             CombatManager.enemyText.text = String.Empty;
             CombatManager.playerText.text = "Hah, I won! Take that, you corporate scum!";
             yield return new WaitForSeconds(CombatManager.dialogueDelay);

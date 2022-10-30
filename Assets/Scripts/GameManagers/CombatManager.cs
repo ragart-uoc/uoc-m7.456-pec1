@@ -13,6 +13,8 @@ namespace PEC1.GameManagers
         public TextMeshProUGUI enemyText;
         public Transform insultComebackParent;
         public GameObject insultComebackPrefab;
+        public GameObject playerInstance;
+        public GameObject enemyInstance;
 
         public float dialogueDelay = 2f;
 
@@ -20,9 +22,14 @@ namespace PEC1.GameManagers
 
         public Character Player = new Character(3);
         public Character Enemy = new Character(3);
+        
+        [HideInInspector] public Animator mPlayerAnimator;
+        [HideInInspector] public Animator mEnemyAnimator;
 
         private void Start()
         {
+            mPlayerAnimator = playerInstance.GetComponent<Animator>();
+            mEnemyAnimator = enemyInstance.GetComponent<Animator>();
             playerText.text = String.Empty;
             enemyText.text = String.Empty;
             DestroyInsultComebacksOnScreen();

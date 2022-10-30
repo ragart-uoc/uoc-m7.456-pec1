@@ -29,6 +29,8 @@ namespace PEC1.BattleStates
             yield return new WaitForSeconds(CombatManager.dialogueDelay);
             if (insultIndex == comebackIndex)
             {
+                CombatManager.mPlayerAnimator.SetTrigger("onPlayerAttack");
+                CombatManager.mEnemyAnimator.SetTrigger("onEnemyHit");
                 yield return new WaitForSeconds(CombatManager.dialogueDelay);
                 if (CombatManager.Enemy.TakeDamage(1))
                 {
@@ -41,6 +43,8 @@ namespace PEC1.BattleStates
             }
             else
             {
+                CombatManager.mEnemyAnimator.SetTrigger("onEnemyAttack");
+                CombatManager.mPlayerAnimator.SetTrigger("onPlayerHit");
                 yield return new WaitForSeconds(CombatManager.dialogueDelay);
                 if (CombatManager.Player.TakeDamage(1))
                 {

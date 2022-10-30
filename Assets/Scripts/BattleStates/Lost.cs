@@ -14,6 +14,8 @@ namespace PEC1.BattleStates
 
         public override IEnumerator Start()
         {
+            CombatManager.mPlayerAnimator.SetTrigger("onPlayerDead");
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
             CombatManager.playerText.text = String.Empty;
             CombatManager.enemyText.text = "I won! Surrender your assets!";
             yield return new WaitForSeconds(CombatManager.dialogueDelay);
