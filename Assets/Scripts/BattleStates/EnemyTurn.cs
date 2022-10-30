@@ -1,50 +1,54 @@
 ﻿using System.Collections;
 using UnityEngine;
+using PEC1.GameManagers;
 
-public class EnemyTurn : State
+namespace PEC1.BattleStates
 {
-    public EnemyTurn(GameplayManager gameplayManager) : base(gameplayManager)
+    public class EnemyTurn : State
     {
-    }
-    
-    public override IEnumerator Start()
-    {
-        var enemyInsultIndex = Random.Range(0, GameplayManager.insultComebacks.Length);
-        var enemyInsult = GameplayManager.insultComebacks[enemyInsultIndex].insult;
-        GameplayManager.storyText.text = "[ENEMY]\n" + enemyInsult;
-        GameplayManager.FillComebacks(enemyInsultIndex);
-        yield break;
-    }
-    
-    public override IEnumerator Comeback(int insultIndex, int comebackIndex)
-    {
-        GameplayManager.DestroyInsultComebacksOnScreen();
-        GameplayManager.storyText.text = "[PLAYER]\n" + GameplayManager.insultComebacks[comebackIndex].comeback;
-        yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-        if (insultIndex == comebackIndex)
+        public EnemyTurn(CombatManager combatManager) : base(combatManager)
         {
-            GameplayManager.storyText.text = "Your opponent lost a life.";
-            yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            if (GameplayManager.Enemy.TakeDamage(1))
-            {
-                GameplayManager.SetState(new Won(GameplayManager));
-            }
-            else
-            {
-                GameplayManager.SetState(new PlayerTurn(GameplayManager));
-            }
         }
-        else
+
+        public override IEnumerator Start()
         {
-            GameplayManager.storyText.text = "You lost a life.";
-            yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            if (GameplayManager.Player.TakeDamage(1))
+            var enemyInsultIndex = Random.Range(0, CombatManager.insultComebacks.Length);
+            var enemyInsult = CombatManager.insultComebacks[enemyInsultIndex].insult;
+            CombatManager.storyText.text = "[ENEMY]\n" + enemyInsult;
+            CombatManager.FillComebacks(enemyInsultIndex);
+            yield break;
+        }
+
+        public override IEnumerator Comeback(int insultIndex, int comebackIndex)
+        {
+            CombatManager.DestroyInsultComebacksOnScreen();
+            CombatManager.storyText.text = "[PLAYER]\n" + CombatManager.insultComebacks[comebackIndex].comeback;
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
+            if (insultIndex == comebackIndex)
             {
-                GameplayManager.SetState(new Lost(GameplayManager));
+                CombatManager.storyText.text = "Your opponent lost a life.";
+                yield return new WaitForSeconds(CombatManager.dialogueDelay);
+                if (CombatManager.Enemy.TakeDamage(1))
+                {
+                    CombatManager.SetState(new Won(CombatManager));
+                }
+                else
+                {
+                    CombatManager.SetState(new PlayerTurn(CombatManager));
+                }
             }
             else
             {
-                GameplayManager.SetState(new EnemyTurn(GameplayManager));
+                CombatManager.storyText.text = "You lost a life.";
+                yield return new WaitForSeconds(CombatManager.dialogueDelay);
+                if (CombatManager.Player.TakeDamage(1))
+                {
+                    CombatManager.SetState(new Lost(CombatManager));
+                }
+                else
+                {
+                    CombatManager.SetState(new EnemyTurn(CombatManager));
+                }
             }
         }
     }

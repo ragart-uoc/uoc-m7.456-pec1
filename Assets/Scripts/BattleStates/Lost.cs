@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PEC1.GameManagers;
 
-public class Lost : State
+namespace PEC1.BattleStates
 {
-    public Lost(GameplayManager gameplayManager) : base(gameplayManager)
+    public class Lost : State
     {
-    }
+        public Lost(CombatManager combatManager) : base(combatManager)
+        {
+        }
 
-    public override IEnumerator Start()
-    {
-        GameplayManager.storyText.text = "You lost the game...";
-        yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-        SceneManager.LoadScene("GameOver");
+        public override IEnumerator Start()
+        {
+            CombatManager.storyText.text = "You lost the game...";
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

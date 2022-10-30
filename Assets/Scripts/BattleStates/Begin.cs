@@ -1,25 +1,29 @@
 ﻿using System.Collections;
 using UnityEngine;
+using PEC1.GameManagers;
 
-public class Begin : State
+namespace PEC1.BattleStates
 {
-    public Begin(GameplayManager gameplayManager) : base(gameplayManager)
+    public class Begin : State
     {
-    }
-    
-    public override IEnumerator Start()
-    {
-        if (Random.value > 0.5f)
+        public Begin(CombatManager combatManager) : base(combatManager)
         {
-            GameplayManager.storyText.text = "[PLAYER] I'll start!";
-            yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            GameplayManager.SetState(new PlayerTurn(GameplayManager));
         }
-        else
+
+        public override IEnumerator Start()
         {
-            GameplayManager.storyText.text = "[ENEMY] It's my turn!";
-            yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-            GameplayManager.SetState(new EnemyTurn(GameplayManager));
+            if (Random.value > 0.5f)
+            {
+                CombatManager.storyText.text = "[PLAYER] I'll start!";
+                yield return new WaitForSeconds(CombatManager.dialogueDelay);
+                CombatManager.SetState(new PlayerTurn(CombatManager));
+            }
+            else
+            {
+                CombatManager.storyText.text = "[ENEMY] It's my turn!";
+                yield return new WaitForSeconds(CombatManager.dialogueDelay);
+                CombatManager.SetState(new EnemyTurn(CombatManager));
+            }
         }
     }
 }

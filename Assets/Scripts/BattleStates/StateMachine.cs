@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+namespace PEC1.BattleStates
 {
-    protected State State;
-    public void SetState(State state)
+    public abstract class StateMachine : MonoBehaviour
     {
-        State = state;
-        StartCoroutine(State.Start());
+        protected State State;
+
+        public void SetState(State state)
+        {
+            State = state;
+            StartCoroutine(State.Start());
+        }
     }
 }

@@ -1,26 +1,30 @@
 ﻿using System.Collections;
+using PEC1.GameManagers;
 
-public abstract class State
+namespace PEC1.BattleStates
 {
-    protected GameplayManager GameplayManager;
-    
-    public State(GameplayManager gameplayManager)
+    public abstract class State
     {
-        GameplayManager = gameplayManager;
-    }
-    
-    public virtual IEnumerator Start()
-    {
-        yield break;
-    }
+        protected CombatManager CombatManager;
 
-    public virtual IEnumerator Insult(int insultIndex)
-    {
-        yield break;
-    }
+        public State(CombatManager combatManager)
+        {
+            CombatManager = combatManager;
+        }
 
-    public virtual IEnumerator Comeback(int insultIndex, int comebackIndex)
-    {
-        yield break;
+        public virtual IEnumerator Start()
+        {
+            yield break;
+        }
+
+        public virtual IEnumerator Insult(int insultIndex)
+        {
+            yield break;
+        }
+
+        public virtual IEnumerator Comeback(int insultIndex, int comebackIndex)
+        {
+            yield break;
+        }
     }
 }

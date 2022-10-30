@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PEC1.GameManagers;
 
-public class Won : State
+namespace PEC1.BattleStates
 {
-    public Won(GameplayManager gameplayManager) : base(gameplayManager)
+    public class Won : State
     {
-    }
+        public Won(CombatManager combatManager) : base(combatManager)
+        {
+        }
 
-    public override IEnumerator Start()
-    {
-        GameplayManager.storyText.text = "You won the game!";
-        yield return new WaitForSeconds(GameplayManager.dialogueDelay);
-        SceneManager.LoadScene("GameOver");
+        public override IEnumerator Start()
+        {
+            CombatManager.storyText.text = "You won the game!";
+            yield return new WaitForSeconds(CombatManager.dialogueDelay);
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }
