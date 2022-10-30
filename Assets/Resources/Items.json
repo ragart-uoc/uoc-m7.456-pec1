@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Rubber Chicken With A Pulley In The Middle",
+        "image": "item-rubberchicken"
+    },
+    {
+        "name": "Melting Mug",
+        "image": "item-meltingmug"
+    },
+    {
+        "name": "Stan's Business Card",
+        "image": "item-businesscard"
+    },
+    {
+        "name": "Head of the Navigator",
+        "image": "item-navigationhead"
+    }
+]

@@ -5,7 +5,7 @@ namespace PEC1.GameManagers
 {
     public class PauseScreenManager : MonoBehaviour
     {
-        public GameObject PauseScreen;
+        public GameObject pauseScreen;
 
         public void LoadMainMenu()
         {
@@ -20,7 +20,7 @@ namespace PEC1.GameManagers
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.Escape))
-                PauseScreen.SetActive(!PauseScreen.activeSelf);
+                pauseScreen.SetActive(!pauseScreen.activeSelf);
         }
     }
 }
