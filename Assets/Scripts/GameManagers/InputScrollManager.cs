@@ -5,12 +5,15 @@ namespace PEC1.GameManagers
 {
     public class InputScrollManager : MonoBehaviour
     {
+        public GameObject scrollBar;
         public Button buttonUp;
         public Button buttonDown;
         public ScrollRect scrollRect;
 
         private void Start()
         {
+            buttonUp.onClick.AddListener(OnButtonUpClick);
+            buttonDown.onClick.AddListener(OnButtonDownClick);            
             buttonUp.interactable = false;
             scrollRect.onValueChanged.AddListener(OnScrollRectValueChanged);
         }
@@ -34,20 +37,35 @@ namespace PEC1.GameManagers
             }
         }
 
-        public void OnButtonUpClick()
+        private void OnButtonUpClick()
         {
             if (scrollRect.normalizedPosition.y < 1)
             {
-                scrollRect.verticalNormalizedPosition += 1 / scrollRect.scrollSensitivity;
+                scrollRect.verticalNormalizedPosition += scrollRect.scrollSensitivity / scrollRect.content.sizeDelta.y;
             }
         }
 
-        public void OnButtonDownClick()
+        private void OnButtonDownClick()
         {
             if (scrollRect.normalizedPosition.y > 0)
             {
-                scrollRect.verticalNormalizedPosition -= 1 / scrollRect.scrollSensitivity;
+                scrollRect.verticalNormalizedPosition -= scrollRect.scrollSensitivity / scrollRect.content.sizeDelta.y;
             }
         }
+
+        private void Update()
+        {
+            
+            if (scrollBar.activeSelf && scrollRect.content.sizeDelta.y <= 0.0001f)
+            {
+                scrollBar.SetActive(false);
+            }
+            
+            if (!scrollBar.activeSelf && scrollRect.content.sizeDelta.y > 0.0001f)
+            {
+                scrollBar.SetActive(true);
+            }
+        }
+
     }
 }
