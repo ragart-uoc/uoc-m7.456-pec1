@@ -9,7 +9,8 @@ namespace PEC1.GameManagers
 {
     public class CombatManager : StateMachine
     {
-        public TextMeshProUGUI storyText;
+        public TextMeshProUGUI playerText;
+        public TextMeshProUGUI enemyText;
         public Transform insultComebackParent;
         public GameObject insultComebackPrefab;
 
@@ -22,7 +23,8 @@ namespace PEC1.GameManagers
 
         private void Start()
         {
-            storyText.text = String.Empty;
+            playerText.text = String.Empty;
+            enemyText.text = String.Empty;
             DestroyInsultComebacksOnScreen();
             insultComebacks = GetInsultComebackList();
             SetState(new Begin(this));

@@ -14,13 +14,13 @@ namespace PEC1.BattleStates
         {
             if (Random.value > 0.5f)
             {
-                CombatManager.storyText.text = "[PLAYER] I'll start!";
+                CombatManager.playerText.text = "Prepare to die!";
                 yield return new WaitForSeconds(CombatManager.dialogueDelay);
                 CombatManager.SetState(new PlayerTurn(CombatManager));
             }
             else
             {
-                CombatManager.storyText.text = "[ENEMY] It's my turn!";
+                CombatManager.enemyText.text = "It's my turn!";
                 yield return new WaitForSeconds(CombatManager.dialogueDelay);
                 CombatManager.SetState(new EnemyTurn(CombatManager));
             }
