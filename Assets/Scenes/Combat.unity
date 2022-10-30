@@ -2689,6 +2689,8 @@ MonoBehaviour:
   enemyInstance: {fileID: 2054537288}
   dialogueDelay: 2
   insultComebacks: []
+  mPlayerAnimator: {fileID: 0}
+  mEnemyAnimator: {fileID: 0}
 --- !u!4 &1299961570
 Transform:
   m_ObjectHideFlags: 0
