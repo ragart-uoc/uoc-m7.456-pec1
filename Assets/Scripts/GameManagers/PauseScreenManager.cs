@@ -14,7 +14,7 @@ namespace PEC1.GameManagers
 
         public void RestartGame()
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Combat");
         }
 
         private void Update()

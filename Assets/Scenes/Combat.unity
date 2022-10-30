@@ -2433,8 +2433,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lorem ipsum dolor sit amet
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54b2e2c671c0d8344be08b46caa93f03, type: 2}
-  m_sharedMaterial: {fileID: -7892850056405597369, guid: 54b2e2c671c0d8344be08b46caa93f03, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bb653a5128edd540a5e177e2d386d01, type: 2}
+  m_sharedMaterial: {fileID: -7892850056405597369, guid: 3bb653a5128edd540a5e177e2d386d01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2465,8 +2465,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3527,8 +3527,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lorem ipsum dolor sit amet
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54b2e2c671c0d8344be08b46caa93f03, type: 2}
-  m_sharedMaterial: {fileID: -7892850056405597369, guid: 54b2e2c671c0d8344be08b46caa93f03, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bb653a5128edd540a5e177e2d386d01, type: 2}
+  m_sharedMaterial: {fileID: -7892850056405597369, guid: 3bb653a5128edd540a5e177e2d386d01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3559,8 +3559,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

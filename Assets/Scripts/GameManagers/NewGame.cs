@@ -7,7 +7,7 @@ namespace PEC1.GameManagers
     {
         public void StartNewGame()
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Combat");
         }
     }
 }

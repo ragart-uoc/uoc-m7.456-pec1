@@ -1,6 +1,7 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace PEC1.GameManagers
 {
@@ -19,6 +20,8 @@ namespace PEC1.GameManagers
             openingText.CrossFadeAlpha(1.0f, 1.5f, false);
             yield return new WaitForSeconds(2.5f);
             openingText.CrossFadeAlpha(0.0f, 1.5f, false);
+            yield return new WaitForSeconds(2.5f);
+            SceneManager.LoadScene("Intro");
         }
     }
 }
