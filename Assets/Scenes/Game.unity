@@ -3242,6 +3242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a492498ea86266447ba2988fc6062ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusBar: {fileID: 492919387}
   statusText: {fileID: 869761229}
   itemParent: {fileID: 827534173}
   itemPrefab: {fileID: 3027888303227969653, guid: 51f3e960ce97aa24183689b1ff887934, type: 3}
@@ -3429,7 +3430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c5c74026b7abc434883bdf9a56a80868, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
