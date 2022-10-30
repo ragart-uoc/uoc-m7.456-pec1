@@ -18,6 +18,7 @@ namespace PEC1.GameManagers
         public void ToggleCredits()
         {
             credits.SetActive(!credits.activeSelf);
+            creditsScrollRect.verticalNormalizedPosition = 1;
         }
         
         public void QuitGame()
@@ -37,8 +38,8 @@ namespace PEC1.GameManagers
             if (Input.GetKeyUp(KeyCode.Escape))
             {
                 ToggleCredits();
-                creditsScrollRect.verticalNormalizedPosition = 1;
             }
         }
+        
     }
 }
