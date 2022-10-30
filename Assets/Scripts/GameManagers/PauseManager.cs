@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace PEC1.GameManagers
 {
-    public class PauseScreenManager : MonoBehaviour
+    public class PauseManager : MonoBehaviour
     {
         public GameObject pauseScreen;
 

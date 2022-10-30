@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace PEC1.GameManagers
@@ -6,7 +8,8 @@ namespace PEC1.GameManagers
     public class MainMenuManager : MonoBehaviour
     {
         public GameObject credits;
-        
+        public ScrollRect creditsScrollRect;
+
         public void StartGame()
         {
             SceneManager.LoadScene("Combat");
@@ -27,8 +30,15 @@ namespace PEC1.GameManagers
         
         private void Update()
         {
-            if (credits.activeSelf && Input.GetKeyUp(KeyCode.Escape))
+            if (!credits.activeSelf)
+                return;
+            if (creditsScrollRect.verticalNormalizedPosition > 0)
+                creditsScrollRect.verticalNormalizedPosition -= Time.deltaTime * 0.1f;
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
                 ToggleCredits();
+                creditsScrollRect.verticalNormalizedPosition = 1;
+            }
         }
     }
 }
